@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-vector-icons')
     compile project(':react-native-gesture-handler')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
@@ -149,3 +150,12 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+// 自定义的字体文件需要在这里赋值声明，如果有多个都需要添加到数组中
+project.ext.vectoricons = [
+    iconFontNames: [ 'iconfont.ttf', 'Ionicons.ttf' ]
+]
+
+// 如果只是使用react-native-vector-icons中的图标，只添加下面这行就行了，上面那段配置可以不写
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+

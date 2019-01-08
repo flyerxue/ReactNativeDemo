@@ -7,14 +7,18 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 
 type Props = {};
 export default class Page4 extends Component<Props> {
   render() {
+    const {navigation} = this.props
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to Page4!</Text>
+        <Button title={'Open Drawer'} onPress={() => navigation.openDrawer()}/>
+        <Button title={'Close Drawer'} onPress={() => navigation.closeDrawer()}/>
+        <Button title={'Toggle Drawer'} onPress={() => navigation.toggleDrawer()}/>
       </View>
     );
   }

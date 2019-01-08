@@ -9,6 +9,8 @@
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 
+import Icon from 'react-native-vector-icons/Ionicons';
+
 type Props = {};
 export default class HomePage extends Component<Props> {
 
@@ -22,6 +24,7 @@ export default class HomePage extends Component<Props> {
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to Page1!</Text>
         <Button
+          style={styles.button}
           title={'Go to Page1'}
           onPress={() => {
             navigation.navigate('Page1', {name: '动态的'})
@@ -39,6 +42,24 @@ export default class HomePage extends Component<Props> {
             navigation.navigate('Page3', {name: 'Devio'})
           }}
         />
+        <Button
+          title={'Go to Bottom Navigator'}
+          onPress={() => {
+            navigation.navigate('Bottom')
+          }}
+        />
+        <Button
+          title={'Go to Top Navigator'}
+          onPress={() => {
+            navigation.navigate('Top')
+          }}
+        />
+        <Button
+          title={'Go to DrawerNav'}
+          onPress={() => {
+            navigation.navigate('DrawerNav')
+          }}
+        />
       </View>
     );
   }
@@ -49,6 +70,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    color: '#ccc',
+  },
+  button: {
+    color: 'red'
   }
 });
