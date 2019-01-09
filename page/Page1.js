@@ -7,9 +7,10 @@
  */
 
 import React, {Component} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View, FlatList} from 'react-native';
 
 type Props = {};
+
 export default class Page1 extends Component<Props> {
   render() {
     const { navigation } = this.props

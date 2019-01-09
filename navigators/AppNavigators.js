@@ -13,6 +13,9 @@ import Page2 from '../page/Page2'
 import Page3 from '../page/Page3'
 import Page4 from '../page/Page4'
 import Page5 from '../page/Page5'
+import FlatListDemo from '../page/FlatListDemo'
+import SwipeableFlatListDemo from '../page/SwipeableFlatListDemo'
+import SectionListDemo from '../page/SectionListDemo'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
@@ -226,6 +229,24 @@ export const AppStackNavigator = createStackNavigator({
     screen: DrawerNav,
     navigationOptions: {
       title: 'This is DrawerNavigator.'
+    }
+  },
+  FlatListDemo: {
+    screen: FlatListDemo,
+    navigationOptions: {
+      title: 'This is FlatListDemo.'
+    }
+  },
+  SwipeableFlatListDemo: {
+    screen: SwipeableFlatListDemo,
+    navigationOptions: {
+      title: 'This is SwipeableFlatListDemo.'
+    }
+  },
+  SectionListDemo: {
+    screen: SectionListDemo,
+    navigationOptions: {
+      title: 'This is SectionListDemo.'
     }
   }
 })
