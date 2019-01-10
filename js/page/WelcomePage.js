@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
-
+import NavigationUtil from '../navigator/NavigationUtil'
 type Props = {};
 export default class WelcomePage extends Component<Props> {
   componentDidMount() {
     console.log('this.props',this.props);
     this.timer = setTimeout(() => {
-      const {navigation} = this.props
-      navigation.navigate('Main')
-    }, 2000)
+      // const {navigation} = this.props
+      // navigation.navigate('Main')
+      NavigationUtil.resetToHomePage({
+        navigation: this.props.navigation
+      })
+    }, 100)
   }
   componentWillUnMount() {
     this.timer && clearTimeout(this.timer)
