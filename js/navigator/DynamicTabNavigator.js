@@ -4,12 +4,13 @@ import { createBottomTabNavigator, createAppContainer, BottomTabBar } from 'reac
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Entypo from 'react-native-vector-icons/Entypo'
-
+import {connect} from 'react-redux';
 import PopularPage from '../page/PopularPage'
 import TrendingPage from '../page/TrendingPage'
 import FavoritePage from '../page/FavoritePage'
 import MyPage from '../page/MyPage'
 import NavigationUtil from "../navigator/NavigationUtil";
+
 // 在这里配置页面的路由
 const TABS = {
   PopularPage: {
@@ -66,7 +67,7 @@ const TABS = {
   },
 }
 type Props = {};
-export default class DynamicTabNavigator extends Component<Props> {
+class DynamicTabNavigator extends Component<Props> {
   constructor(props) {
     super(props)
     console.disableYellowBox = true
@@ -76,7 +77,9 @@ export default class DynamicTabNavigator extends Component<Props> {
     const tabs = {PopularPage, TrendingPage, FavoritePage, MyPage} //根据需要定制显示的tab
     PopularPage.navigationOptions.tabBarLabel = '最热1' // 动态配置Tab属性
     return createAppContainer(createBottomTabNavigator(tabs, {
-      tabBarComponent: TabBarComponent
+      tabBarComponent: props => {
+        return <TabBarComponent theme={this.props.theme} {...props}/>
+      }
     }))
   }
   render() {
@@ -113,11 +116,8 @@ class TabBarComponent extends React.Component{
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  }
-});
+
+const mapStateToProps = state => ({
+  theme: state.theme.theme
+})
+export default connect(mapStateToProps)(DynamicTabNavigator)
