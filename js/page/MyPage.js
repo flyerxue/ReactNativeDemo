@@ -7,17 +7,6 @@ export default class MyPage extends Component<Props> {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to MyPage!</Text>
-        <Button
-          title='改变主题色'
-          onPress={() => {
-            navigation.setParams({
-              theme: {
-                tintColor: 'gray',
-                updateTime: new Date().getTime()
-              }
-            })
-          }}
-        />
       </View>
     );
   }

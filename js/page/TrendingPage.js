@@ -13,6 +13,8 @@ class TrendingPage extends Component<Props> {
         <Button
           title='改变主题颜色'
           onPress={()=> {
+
+            // redux之前操作
             // navigation.setParams({
             //   theme: {
             //     tintColor: 'red',
@@ -20,7 +22,7 @@ class TrendingPage extends Component<Props> {
             //   }
             // })
 
-            this.props.onThemeChange('red')
+            this.props.onThemeChange('orange')
           }}
         />
       </View>

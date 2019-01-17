@@ -6,7 +6,8 @@ import store from './store'
 type Props = {};
 export default class App extends Component<Props> {
     render() {
-        /**
+      console.log('store',store);
+      /**
          * 将store传递给App框架
          */
         return (

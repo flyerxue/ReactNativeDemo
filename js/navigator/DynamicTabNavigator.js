@@ -73,10 +73,14 @@ class DynamicTabNavigator extends Component<Props> {
     console.disableYellowBox = true
   }
   _tabNavigator() {
+    // 防止每次改变颜色 执行render时都会创建一次createBottomTabNavigator
+    if(this.Tabs) {
+      return this.Tabs
+    }
     const {PopularPage, TrendingPage, FavoritePage, MyPage} = TABS
     const tabs = {PopularPage, TrendingPage, FavoritePage, MyPage} //根据需要定制显示的tab
-    PopularPage.navigationOptions.tabBarLabel = '最热1' // 动态配置Tab属性
-    return createAppContainer(createBottomTabNavigator(tabs, {
+    PopularPage.navigationOptions.tabBarLabel = '最热' // 动态配置Tab属性
+    return this.Tabs = createAppContainer(createBottomTabNavigator(tabs, {
       tabBarComponent: props => {
         return <TabBarComponent theme={this.props.theme} {...props}/>
       }
@@ -94,23 +98,32 @@ class TabBarComponent extends React.Component{
   constructor(props) {
     super(props)
     this.theme = {
-      tintColor: props.activeTintColor,
+      tintColor: props.theme,
       updateTime: new Date().getTime()
     }
   }
   render() {
-    const {routes, index} = this.props.navigation.state;
-    if(routes[index].params) {
-      const { theme } = routes[index].params
-      // 以最新的更新时间为主,防止被其他tab之前的修改覆盖掉
-      if(theme && theme.updateTime > this.theme.updateTime) {
-        this.theme = theme
-      }
-    }
+    // 用redux之前
+    // const {routes, index} = this.props.navigation.state;
+    // if(routes[index].params) {
+    //   const { theme } = routes[index].params
+    //   // 以最新的更新时间为主,防止被其他tab之前的修改覆盖掉
+    //   if(theme && theme.updateTime > this.theme.updateTime) {
+    //     this.theme = theme
+    //   }
+    // }
+    // return (
+    //   <BottomTabBar
+    //     {...this.props}
+    //     activeTintColor={this.theme.tintColor || this.props.activeTintColor}
+    //   />
+    // )
+
+    //  用了redux
     return (
       <BottomTabBar
         {...this.props}
-        activeTintColor={this.theme.tintColor || this.props.activeTintColor}
+        activeTintColor={this.props.theme}
       />
     )
   }

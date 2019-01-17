@@ -1,89 +1,41 @@
 import React, {Component} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import Ionicons from 'react-native-vector-icons/Ionicons'
-import Entypo from 'react-native-vector-icons/Entypo'
-
-import PopularPage from './PopularPage'
-import TrendingPage from './TrendingPage'
-import FavoritePage from './FavoritePage'
-import MyPage from './MyPage'
 import NavigationUtil from "../navigator/NavigationUtil";
+import {connect} from 'react-redux';
+import {BackHandler} from 'react-native'
+import {NavigationActions} from 'react-navigation'
 
 import DynamicTabNavigator from '../navigator/DynamicTabNavigator'
 
 type Props = {};
-export default class HomePage extends Component<Props> {
-  // _tabNavigator() {
-  //   return createAppContainer(createBottomTabNavigator({
-  //     PopularPage: {
-  //       screen: PopularPage,
-  //       navigationOptions: {
-  //         tabBarLabel: '最热',
-  //         tabBarIcon: ({tintColor, focused}) => {
-  //           return <MaterialIcons
-  //             name={'whatshot'}
-  //             size={26}
-  //             style={{color: tintColor}}
-  //           />
-  //         }
-  //       }
-  //     },
-  //     TrendingPage: {
-  //       screen: TrendingPage,
-  //       navigationOptions: {
-  //         tabBarLabel: '趋势',
-  //         tabBarIcon: ({tintColor, focused}) => {
-  //           return <Ionicons
-  //             name={'md-trending-up'}
-  //             size={26}
-  //             style={{color: tintColor}}
-  //           />
-  //         }
-  //       }
-  //     },
-  //     FavoritePage: {
-  //       screen: FavoritePage,
-  //       navigationOptions: {
-  //         tabBarLabel: '收藏',
-  //         tabBarIcon: ({tintColor, focused}) => {
-  //           return <MaterialIcons
-  //             name={'favorite'}
-  //             size={26}
-  //             style={{color: tintColor}}
-  //           />
-  //         }
-  //       }
-  //     },
-  //     MyPage: {
-  //       screen: MyPage,
-  //       navigationOptions: {
-  //         tabBarLabel: '我的',
-  //         tabBarIcon: ({tintColor, focused}) => {
-  //           return <Entypo
-  //             name={'user'}
-  //             size={26}
-  //             style={{color: tintColor}}
-  //           />
-  //         }
-  //       }
-  //     },
-  //   }))
-  // }
+class HomePage extends Component<Props> {
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress)
+  }
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress)
+  }
+  /**
+   * 处理 android 中的物理返回键
+   * https://reactnavigation.org/docs/en/redux-integration.html#handling-the-hardware-back-button-in-android
+   * @returns {boolean}
+   */
+  onBackPress = () => {
+    const {dispatch, nav} = this.props
+    if(nav.routes[1].index === 0) {  //如果RootNavigator中的MainNavigator的index为0，则不处理返回事件
+      return false
+    }
+    dispatch(NavigationActions.back())
+    return true
+  }
   render() {
     NavigationUtil.navigation = this.props.navigation
-    // const Tab = this._tabNavigator()
     return <DynamicTabNavigator/>
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  }
-});
+const mapStateToProps = state =>{
+  return  ({
+    nav: state.nav
+  })
+}
+export default connect(mapStateToProps)(HomePage)
