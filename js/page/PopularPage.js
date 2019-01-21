@@ -55,32 +55,7 @@ class PopularTab extends Component<Props> {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>{tabLabel}</Text>
-        <Text onPress={() => {
-          NavigationUtil.goPage({
-            navigation: this.props.navigation
-          }, 'DetailPage')
-        }}>跳转到详情页</Text>
-        <Button
-          title={'Fetch 使用'}
-          onPress={() => {
-          NavigationUtil.goPage({
-            navigation: this.props.navigation
-          }, 'FetchDemoPage')
-        }}/>
-        <Button
-          title={'AsyncStorage 使用'}
-          onPress={() => {
-          NavigationUtil.goPage({
-            navigation: this.props.navigation
-          }, 'AsyncStorageDemoPage')
-        }}/>
-        <Button
-          title={'DataStore 使用'}
-          onPress={() => {
-          NavigationUtil.goPage({
-            navigation: this.props.navigation
-          }, 'DataStoreDemoPage')
-        }}/>
+
       </View>
     );
   }

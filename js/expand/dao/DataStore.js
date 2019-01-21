@@ -98,7 +98,7 @@ export default class DataStore {
     const currentDate = new Date()
     const targetDate = new Date()
     targetDate.setTime(timestamp)
-    if(currentDate.getMonth() !== targetDate.getMonth()) {
+    if (currentDate.getMonth() !== targetDate.getMonth()) {
       return false
     }
     if (currentDate.getDate() !== targetDate.getDate()) {
