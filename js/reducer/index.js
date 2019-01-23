@@ -3,7 +3,6 @@ import theme from './theme'
 import popular from './popular'
 import {rootCom, RootNavigator} from '../navigator/AppNavigator';
 
-console.log(RootNavigator);
 
 //1.指定默认state
 const navState = RootNavigator.router.getStateForAction(RootNavigator.router.getActionForPathAndParams(rootCom));

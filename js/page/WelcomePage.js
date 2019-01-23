@@ -4,7 +4,6 @@ import NavigationUtil from '../navigator/NavigationUtil'
 type Props = {};
 export default class WelcomePage extends Component<Props> {
   componentDidMount() {
-    console.log('this.props',this.props);
     this.timer = setTimeout(() => {
       // const {navigation} = this.props
       // navigation.navigate('Main')

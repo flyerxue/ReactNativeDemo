@@ -43,6 +43,7 @@ export default class DataStore {
    * @return {Promise}
    */
   fetchNetData(url) {
+    console.log('url---->',url);
     return new Promise((resolve, reject) => {
       fetch(url)
         .then((response) => {
