@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FlatList, StyleSheet, Text, View, RefreshControl, ActivityIndicator} from 'react-native';
+import {FlatList, StyleSheet, Text, View, RefreshControl, ActivityIndicator, DeviceInfo} from 'react-native';
 import {connect} from 'react-redux'
 import actions from '../actions/index'
 import {createMaterialTopTabNavigator, createAppContainer} from 'react-navigation'
@@ -51,9 +51,10 @@ export default class PopularPage extends Component<Props> {
         tabBarOptions: {
           tabStyle: styles.tabStyle,
           upperCaseLabel: false, //是否使标签大写,默认为true
-          scrollEnabled: true, // 是否支持选项卡滚动, 默认为false
+          scrollEnabled: true, // 是否支持选项卡滚动, 默认为false  (开启的话在Android tab的高度刚开始渲染时会很高)
           style: {
             backgroundColor: '#678', //TabBar的背景颜色
+            height: 30
           },
           indicatorStyle: styles.indicatorStyle, // 标签指示器的样式
           labelStyle: styles.labelStyle, // 文字的样式
@@ -61,7 +62,7 @@ export default class PopularPage extends Component<Props> {
       }
     ))
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, marginTop: DeviceInfo.isIPhoneX_deprecated ? 30 : 0}}>
         {navigationBar}
         <TabNavigator/>
 
@@ -198,7 +199,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   tabStyle: {
-    minWidth: 50
+    // minWidth: 50 // fix minWidth 会导致tabStyle 初次加载时闪烁
+    padding: 0
+
   },
   indicatorStyle: {
     height: 2,
@@ -206,8 +209,7 @@ const styles = StyleSheet.create({
   },
   labelStyle: {
     fontSize: 13,
-    marginTop: 6,
-    marginBottom: 6
+    margin: 0
   },
   indicatorContainer: {
     alignItems: 'center'

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
+import {DeviceInfo} from 'react-native'
 import { createBottomTabNavigator, createAppContainer, BottomTabBar } from 'react-navigation'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
