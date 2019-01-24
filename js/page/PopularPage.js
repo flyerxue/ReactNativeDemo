@@ -6,10 +6,11 @@ import {createMaterialTopTabNavigator, createAppContainer} from 'react-navigatio
 import  NavigationUtil from '../navigator/NavigationUtil'
 import PopularItem from '../common/PopularItem'
 import Toast from 'react-native-easy-toast'
+import NavigationBar from '../common/NavigationBar'
 
 const URL = 'https://api.github.com/search/repositories?q=';
 const QUERY_STR = '&sort=stars';
-const THEME_COLOR = 'red';
+const THEME_COLOR = '#678';
 type Props = {};
 export default class PopularPage extends Component<Props> {
   constructor(props){
@@ -36,6 +37,15 @@ export default class PopularPage extends Component<Props> {
     return tabs
   }
   render() {
+    let statusBar = {
+      backgroundColor: THEME_COLOR,
+      barStyle: 'light-content'
+    };
+    let navigationBar = <NavigationBar
+      title={'最热'}
+      statusBar={statusBar}
+      style={{backgroundColor: THEME_COLOR}}
+    />;
     const TabNavigator = createAppContainer(createMaterialTopTabNavigator(
       this._genTabs(), {
         tabBarOptions: {
@@ -51,7 +61,12 @@ export default class PopularPage extends Component<Props> {
       }
     ))
     return (
-      <TabNavigator/>
+      <View style={{flex: 1}}>
+        {navigationBar}
+        <TabNavigator/>
+
+      </View>
+
     );
   }
 }
@@ -172,6 +187,7 @@ const mapDispatchToProps = dispatch => ({
   onLoadMorePopular: (storeName, pageIndex, pageSize, items, callBack) => dispatch(actions.onLoadMorePopular(storeName, pageIndex, pageSize, items, callBack))
 })
 
+// 注意: connect 只是个function, 并不一定非要放在export后面
 const PopularTabPage = connect(mapStateToProps, mapDispatchToProps)(PopularTab)
 
 const styles = StyleSheet.create({
