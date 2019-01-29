@@ -87,7 +87,7 @@ class PopularTab extends Component<Props> {
     const store = this._store()
     const url = this.genFetchUrl(this.storeName)
     if(loadMore){
-      onLoadMorePopular(this.storeName, ++store.pageIndex, pageSize, store.items, callback => {
+      onLoadMorePopular(this.storeName, ++store.pageIndex, pageSize, store.items, callBack => {
         this.refs.toast.show('没有更多了')
       })
     } else {
@@ -122,7 +122,9 @@ class PopularTab extends Component<Props> {
       <PopularItem
         item={item}
         onSelect={() => {
-
+          NavigationUtil.goPage({
+            projectModes: item
+          }, 'DetailPage')
         }}
       />
     )

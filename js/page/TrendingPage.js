@@ -188,7 +188,9 @@ class TrendingTab extends Component<Props> {
       <TrendingItem
         item={item}
         onSelect={() => {
-
+          NavigationUtil.goPage({
+            projectModes: item
+          }, 'DetailPage')
         }}
       />
     )
