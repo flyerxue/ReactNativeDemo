@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {ViewPropTypes, Text, StyleSheet, StatusBar, View, Platform, Modal, TouchableOpacity, DeviceInfo} from 'react-native'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import TimeSpan from '../mo/TimeSpan'
+import TimeSpan from '../model/TimeSpan'
 
 export const TimeSpans = [new TimeSpan('今天', 'since=daily'), new TimeSpan('本周', 'since=weekly'), new TimeSpan('本月', 'since=monthly')]
 export default class TrendingDialog extends Component{

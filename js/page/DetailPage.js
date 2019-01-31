@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, StyleSheet, Text, View, WebView, TouchableOpacity} from 'react-native';
+import {Button, StyleSheet, Text, View, WebView, TouchableOpacity, DeviceInfo} from 'react-native';
 import NavigationBar from '../common/NavigationBar'
 import ViewUtil from '../util/ViewUtil'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
